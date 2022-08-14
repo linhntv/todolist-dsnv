@@ -107,9 +107,13 @@ export default {
   },
   methods:{
     addItems(){
-      this.items.push(this.newItem)
+     if(this.newItem.name==="" || this.newItem.age==="" || this.newItem.adress==="" || this.newItem.position===""){
+      alert("Vui lòng nhập đầy đủ dữ liệu")
+     }else{
+       this.items.push(this.newItem)
       this.newItem=""
       this.isSubmit=false
+     }
     },
     deleteTodo(index){
       this.items.splice(index,1)
