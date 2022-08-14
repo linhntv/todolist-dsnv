@@ -118,13 +118,7 @@ export default {
     deleteTodo(index){
       this.items.splice(index,1)
     },
-    editTodo(item,index){
-     this.NewItem.name=item.name
-     this.NewItem.age=item.age
-     this.NewItem.adress=item.adress
-     this.NewItem.position=item.position
-     this.editNew=index+1
-    }
+   
   }
 }
 </script>
