@@ -1,4 +1,6 @@
+<!-- eslint-disable no-undef -->
 <template>
+
   <div class="todo-form">
     <div class="todo-group">
       <h1>Danh sách nhân viên</h1>
@@ -24,7 +26,7 @@
             <th>{{item.adress}}</th>
             <th>{{item.position}}</th>
             <th>
-              <i class="fa-solid fa-pen-to-square" @click="edit=!edit"></i>
+              <i class="fa-solid fa-pen-to-square" @click="showEditFC(item, index)"></i>
               <span>or</span>
               <i class="fa-solid fa-trash-can" @click="deleteTodo(index)"></i>
             </th>
@@ -63,27 +65,27 @@
     </div>
   </div>
   <!-- form edit modal todolist -->
-   <div class="form-modal2" v-if="edit">
+   <div class="form-modal2" v-if="showEditModal">
     <div class="modal-warp">
       <div class="modal-group">
         <p>Name:</p>
-        <input type="text" v-model="newItem.name">
+        <input type="text" v-model="formEdit.name">
       </div>
        <div class="modal-group">
         <p>Age:</p>
-        <input type="text" v-model="newItem.age">
+        <input type="text" v-model="formEdit.age">
       </div>
        <div class="modal-group">
         <p>adress:</p>
-        <input type="text" v-model="newItem.adress">
+        <input type="text" v-model="formEdit.adress">
       </div>
        <div class="modal-group">
         <p>Position:</p>
-        <input type="text" v-model="newItem.position">
+        <input type="text" v-model="formEdit.position">
       </div >
       <div class="warp-note">
-        <button class="btn submit" @click="edit=!edit">Cancle</button>
-        <button class="btn submit">Edit</button>
+        <button class="btn submit" @click="showEditModal = !showEditModal">Cancle</button>
+        <button class="btn submit" @click="edit">Edit</button>
       </div>
     </div>
   </div>
@@ -101,23 +103,40 @@ export default {
       ],
       newItem:{name:'',age:'',adress:'',position:'',done:false,},
       isSubmit:false,
-      edit:false,
-      editNew:''
+      showEditModal:false,
+      formEdit:{name:'',age:'',adress:'',position:'',done:false,},
+      editIndex:'',
+      hello:[],
     }
   },
+  
   methods:{
     addItems(){
      if(this.newItem.name==="" || this.newItem.age==="" || this.newItem.adress==="" || this.newItem.position===""){
       alert("Vui lòng nhập đầy đủ dữ liệu")
      }else{
-       this.items.push(this.newItem)
-      this.newItem=""
+      this.items.push(...this.newItem)
+      this.newItem={name:'',age:'',adress:'',position:'',done:false,}
       this.isSubmit=false
      }
     },
     deleteTodo(index){
-      this.items.splice(index,1)
+      if(confirm('Bạn có muốn xoá không?')){
+        this.items.splice(index,1)
+      }  
     },
+    showEditFC(item, index) {
+      this.showEditModal = !this.showEditModal;
+      this.formEdit = item;
+      this.editIndex = index;
+    },
+    edit(){
+      if(confirm('Bạn có muốn thay đổi không?')){
+        this.items[this.editIndex]=this.formEdit
+        this.showEditModal = !this.showEditModal;
+      }
+      
+    }
    
   }
 }
@@ -133,7 +152,7 @@ export default {
       
       h1{
         text-align: center;
-        padding: 100px;
+        padding: 50px;
         color:gold;
       }
       .Add-Edit-todo{
