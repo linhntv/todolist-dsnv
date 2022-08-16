@@ -162,10 +162,9 @@ export default {
     },
     showEditFC(item, index) {
       this.showEditModal = !this.showEditModal;
-      this.formEdit = item;
+      this.formEdit = {...item};
       this.editIndex = index;
     },
-
     edit() {
       this.items[this.editIndex] = this.formEdit;
       this.showEditModal = !this.showEditModal
