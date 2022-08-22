@@ -18,28 +18,18 @@
             <th>Add/Remove</th>
           </thead>
           <tbody v-for="(item, index) in items" :key="index">
-            <th>{{ index + 1 }}</th>
+            <th>{{ index+1 }}</th>
             <th>{{ item.name }}</th>
             <th>{{ item.age }}</th>
             <th>{{ item.adress }}</th>
             <th>{{ item.position }}</th>
             <th>
-<<<<<<< HEAD
               <i class="fa-solid fa-pen-to-square" @click="showEditFC(item, index)"></i>
-=======
-              <i
-                class="fa-solid fa-pen-to-square"
-                @click="showEditFC(item, index)"
-              ></i>
->>>>>>> cc6e9386e4fec0ae22091378769a3405d2103ac9
               <span>or</span>
               <i class="fa-solid fa-trash-can" @click="deleteTodo(index)"></i>
             </th>
           </tbody>
         </table>
-      </div>
-      <div v-for="(value, index) in todoList" :key="index">
-        {{ value.title }}
       </div>
     </div>
   </div>
@@ -69,51 +59,26 @@
     </div>
   </div>
   <!-- form edit modal todolist -->
-<<<<<<< HEAD
    <div class="form-modal2" v-if="showEditModal">
     <div class="modal-warp">
       <div class="modal-group">
         <p>Name:</p>
         <input type="text" v-model="formEdit.name">
-=======
-  <div class="form-modal2" v-if="showEditModal">
-    <div class="modal-warp">
-      <div class="modal-group">
-        <p>Name:</p>
-        <input type="text" v-model="formEdit.name" />
->>>>>>> cc6e9386e4fec0ae22091378769a3405d2103ac9
       </div>
       <div class="modal-group">
         <p>Age:</p>
-<<<<<<< HEAD
         <input type="text" v-model="formEdit.age">
-=======
-        <input type="text" v-model="formEdit.age" />
->>>>>>> cc6e9386e4fec0ae22091378769a3405d2103ac9
       </div>
       <div class="modal-group">
         <p>adress:</p>
-<<<<<<< HEAD
         <input type="text" v-model="formEdit.adress">
-=======
-        <input type="text" v-model="formEdit.adress" />
->>>>>>> cc6e9386e4fec0ae22091378769a3405d2103ac9
       </div>
       <div class="modal-group">
         <p>Position:</p>
-<<<<<<< HEAD
         <input type="text" v-model="formEdit.position">
       </div >
       <div class="warp-note">
         <button class="btn submit" @click="showEditModal = !showEditModal">Cancle</button>
-=======
-        <input type="text" v-model="formEdit.position" />
-      </div>
-      <div class="warp-note">
-        <button class="btn submit" @click="showEditModal = !showEditModal">
-          Cancle
-        </button>
->>>>>>> cc6e9386e4fec0ae22091378769a3405d2103ac9
         <button class="btn submit" @click="edit">Edit</button>
       </div>
     </div>
@@ -121,6 +86,7 @@
 </template>
 
 <script>
+// import axios from 'axios'
 export default {
   data() {
     return {
@@ -154,16 +120,20 @@ export default {
           done: false,
         },
       ],
-<<<<<<< HEAD
       newItem:{name:'',age:'',adress:'',position:'',done:false,},
       isSubmit:false,
       showEditModal:false,
       formEdit:{name:'',age:'',adress:'',position:'',done:false,},
       editIndex:'',
-      hello:[],
+      getTodo:[],
     }
   },
-  
+  // created(){
+  //   axios.get('https://jsonplaceholder.typicode.com/todos')
+  //     .then(response=>{
+  //       this.items = response.data
+  //     })
+  // },
   methods:{
     addItems(){
      if(this.newItem.name==="" || this.newItem.age==="" || this.newItem.adress==="" || this.newItem.position===""){
@@ -189,63 +159,10 @@ export default {
         this.items[this.editIndex]=this.formEdit
         this.showEditModal = !this.showEditModal;
       }
-      
-    }
+    },
    
   }
 }
-=======
-      newItem: { name: "", age: "", adress: "", position: "", done: false },
-      isSubmit: false,
-      showEditModal: false,
-      editIndex: "",
-      todoList: [],
-      formEdit: {
-        name: "",
-        age: "",
-        adress: "",
-        position: "",
-        done: false,
-      },
-    };
-  },
-  methods: {
-    addItems() {
-      if (
-        this.newItem.name === "" ||
-        this.newItem.age === "" ||
-        this.newItem.adress === "" ||
-        this.newItem.position === ""
-      ) {
-        alert("Vui lòng nhập đầy đủ dữ liệu");
-      } else {
-        this.items.push({ ...this.newItem });
-        this.newItem = {
-          name: "",
-          age: "",
-          adress: "",
-          position: "",
-          done: false,
-        };
-        this.isSubmit = false;
-      }
-    },
-    showEditFC(item, index) {
-      this.showEditModal = !this.showEditModal;
-      this.formEdit = {...item};
-      this.editIndex = index;
-    },
-    edit() {
-      this.items[this.editIndex] = this.formEdit;
-      this.showEditModal = !this.showEditModal
-    },
-    deleteTodo(index) {
-      this.items.splice(index, 1);
-    },
-    async getTodo() {},
-  },
-};
->>>>>>> cc6e9386e4fec0ae22091378769a3405d2103ac9
 </script>
 
 <style lang="scss">
@@ -257,7 +174,7 @@ export default {
   .todo-group {
     h1 {
       text-align: center;
-      padding: 100px;
+      padding: 50px 0 20px;
       color: gold;
     }
     .Add-Edit-todo {
@@ -272,31 +189,12 @@ export default {
         margin: auto;
         width: 95%;
         text-align: center;
-<<<<<<< HEAD
         padding: 50px;
-        color:gold;
-      }
-      .Add-Edit-todo{
-        display:flex;
-        margin: 8px auto;
-        background-color:navy;
-        color:#fff;
-      }
-      .todo-table {
-        padding-bottom:30px;
-        .table{
-          margin:auto;
-          width: 95%;
-          text-align:center;
-          thead{
+        color:rgb(3, 18, 64);
+        thead{
             th{
               border:2px solid rgb(101, 10, 10);
             }
-=======
-        thead {
-          th {
-            border: 2px solid rgb(101, 10, 10);
->>>>>>> cc6e9386e4fec0ae22091378769a3405d2103ac9
           }
         }
         tbody {
@@ -319,7 +217,12 @@ export default {
           }
         }
       }
-    }
+      .Add-Edit-todo{
+        display:flex;
+        margin: 8px auto;
+        background-color:navy;
+        color:#fff;
+      }
   }
 }
 .form-modal,
